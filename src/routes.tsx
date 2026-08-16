@@ -17,6 +17,8 @@ const ResourceDetailPage = lazy(() => import('@/pages/ResourceDetailPage'));
 const LoginPage          = lazy(() => import('@/pages/LoginPage'));
 const AdminPage          = lazy(() => import('@/pages/AdminPage'));
 const ProfilePage        = lazy(() => import('@/pages/ProfilePage'));
+const GatewayPage        = lazy(() => import('@/pages/GatewayPage'));
+const ApiKeysPage        = lazy(() => import('@/pages/ApiKeysPage'));
 
 export interface RouteConfig {
   name: string;
@@ -47,4 +49,6 @@ export const routes: RouteConfig[] = [
   { name: 'Login',          path: '/login',               element: <LoginPage />,           public: true },
   { name: 'Admin',          path: '/admin',               element: <AdminPage />,           public: false },
   { name: 'Profile',        path: '/profile',             element: <ProfilePage />,         public: false },
+  { name: 'Gateway',        path: '/gateway',             element: <GatewayPage />,         public: true },
+  { name: 'API Keys',       path: '/api-keys',            element: <ApiKeysPage />,         public: false },
 ];

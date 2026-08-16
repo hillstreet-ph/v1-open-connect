@@ -2,7 +2,7 @@ import { type ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from 'next-themes';
 import {
-  BookOpen, Bot, Cpu, Home, Info, Menu, MessageSquare, Moon,
+  BookOpen, Bot, Cpu, Globe2, Home, Info, Menu, MessageSquare, Moon,
   Puzzle, Search, Server, Sun, Wrench, X, Zap, LogIn, LogOut,
   User, ShieldCheck,
 } from 'lucide-react';
@@ -26,6 +26,7 @@ const navLinks = [
   { to: '/prompts',     label: 'Prompts',  icon: MessageSquare },
   { to: '/guides',      label: 'Guides',   icon: BookOpen },
   { to: '/setup-guides',label: 'Setup',    icon: Cpu },
+  { to: '/gateway',     label: 'Gateway',  icon: Globe2 },
   { to: '/about',       label: 'About',    icon: Info },
 ];
 
