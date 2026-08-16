@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, ExternalLink, Key, Server, Zap, Globe, BookOpen, CheckCircle, Terminal, ChevronDown, ChevronRight } from 'lucide-react';
+import { Copy, ExternalLink, Key, Server, Zap, Globe, BookOpen, CheckCircle, Terminal, ChevronDown, ChevronRight, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,9 +9,10 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
 const BASE = 'https://hclzajrfohycvoysknkq.supabase.co/functions/v1';
-const API_BASE  = `${BASE}/oc-api`;
-const MCP_BASE  = `${BASE}/oc-mcp`;
+const API_BASE    = `${BASE}/oc-api`;
+const MCP_BASE    = `${BASE}/oc-mcp`;
 const PLUGIN_BASE = `${BASE}/oc-plugin`;
+const OAUTH_BASE  = `${BASE}/oc-oauth`;
 
 function CodeBlock({ code, lang = 'bash' }: { code: string; lang?: string }) {
   const copy = () => { navigator.clipboard.writeText(code); toast.success('Copied!'); };
@@ -94,11 +95,12 @@ export default function GatewayPage() {
       </div>
 
       {/* Capability cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {[
           { icon: Globe,    title: 'REST API',        desc: 'Standard JSON REST — use from any app, script, or workflow.',  badge: 'Bearer token' },
           { icon: Terminal, title: 'MCP Server',       desc: 'JSON-RPC 2.0 — connect Claude Desktop, Cursor, Open WebUI.',  badge: 'JSON-RPC 2.0' },
           { icon: Zap,      title: 'ChatGPT Plugin',  desc: 'OpenAI Plugin manifest — install directly in ChatGPT.',       badge: 'OpenAI spec' },
+          { icon: Shield,   title: 'OAuth 2.0',       desc: 'Let external apps authenticate users — auth code + PKCE.',    badge: 'RFC 6749' },
         ].map(({ icon: Icon, title, desc, badge }) => (
           <Card key={title} className="h-full">
             <CardHeader className="pb-2">
@@ -115,10 +117,11 @@ export default function GatewayPage() {
 
       {/* Main tabs */}
       <Tabs defaultValue="rest">
-        <TabsList className="grid w-full grid-cols-3 mb-8">
+        <TabsList className="grid w-full grid-cols-4 mb-8">
           <TabsTrigger value="rest">REST API</TabsTrigger>
           <TabsTrigger value="mcp">MCP Server</TabsTrigger>
           <TabsTrigger value="plugin">ChatGPT Plugin</TabsTrigger>
+          <TabsTrigger value="oauth">OAuth 2.0</TabsTrigger>
         </TabsList>
 
         {/* ── REST API ── */}
@@ -356,11 +359,12 @@ Header: Authorization: Bearer YOUR_API_KEY`} lang="text" />
           <BookOpen className="h-4 w-4 text-primary" />
           <h3 className="font-medium">Quick Reference</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
           {[
-            { label: 'REST API base', value: API_BASE },
-            { label: 'MCP endpoint',  value: MCP_BASE },
-            { label: 'Plugin manifest', value: `${PLUGIN_BASE}/.well-known/ai-plugin.json` },
+            { label: 'REST API base',     value: API_BASE },
+            { label: 'MCP endpoint',      value: MCP_BASE },
+            { label: 'Plugin manifest',   value: `${PLUGIN_BASE}/.well-known/ai-plugin.json` },
+            { label: 'OAuth authorize',   value: `${OAUTH_BASE}/authorize` },
           ].map(({ label, value }) => (
             <div key={label}>
               <p className="text-muted-foreground mb-1">{label}</p>
@@ -378,6 +382,9 @@ Header: Authorization: Bearer YOUR_API_KEY`} lang="text" />
       <div className="mt-6 flex flex-wrap gap-3">
         <Link to="/api-keys">
           <Button variant="outline" size="sm"><Key className="h-4 w-4 mr-2" /> Manage API Keys</Button>
+        </Link>
+        <Link to="/oauth-apps">
+          <Button variant="outline" size="sm"><Shield className="h-4 w-4 mr-2" /> OAuth Apps</Button>
         </Link>
         <a href={`${PLUGIN_BASE}/openapi.yaml`} target="_blank" rel="noopener noreferrer">
           <Button variant="ghost" size="sm"><Server className="h-4 w-4 mr-2" /> OpenAPI Spec</Button>

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from 'next-themes';
 import {
   BookOpen, Bot, Cpu, Globe2, Home, Info, Menu, MessageSquare, Moon,
-  Puzzle, Search, Server, Sun, Wrench, X, Zap, LogIn, LogOut,
+  Puzzle, Search, Server, Shield, Sun, Wrench, X, Zap, LogIn, LogOut,
   User, ShieldCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,7 @@ const navLinks = [
   { to: '/guides',      label: 'Guides',   icon: BookOpen },
   { to: '/setup-guides',label: 'Setup',    icon: Cpu },
   { to: '/gateway',     label: 'Gateway',  icon: Globe2 },
+  { to: '/oauth-apps',  label: 'OAuth',    icon: Shield },
   { to: '/about',       label: 'About',    icon: Info },
 ];
 

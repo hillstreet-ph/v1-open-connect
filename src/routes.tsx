@@ -19,6 +19,7 @@ const AdminPage          = lazy(() => import('@/pages/AdminPage'));
 const ProfilePage        = lazy(() => import('@/pages/ProfilePage'));
 const GatewayPage        = lazy(() => import('@/pages/GatewayPage'));
 const ApiKeysPage        = lazy(() => import('@/pages/ApiKeysPage'));
+const OAuthAppsPage      = lazy(() => import('@/pages/OAuthAppsPage'));
 
 export interface RouteConfig {
   name: string;
@@ -51,4 +52,5 @@ export const routes: RouteConfig[] = [
   { name: 'Profile',        path: '/profile',             element: <ProfilePage />,         public: false },
   { name: 'Gateway',        path: '/gateway',             element: <GatewayPage />,         public: true },
   { name: 'API Keys',       path: '/api-keys',            element: <ApiKeysPage />,         public: false },
+  { name: 'OAuth Apps',    path: '/oauth-apps',          element: <OAuthAppsPage />,       public: false },
 ];
